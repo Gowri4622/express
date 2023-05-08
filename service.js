@@ -5,28 +5,28 @@ const router = express.Router()
 
 const lisOfService=[
         {
-            "id":1,
+           
 
             "Name":"Web Development"
 
         },
         {
-            "id":2,
+            
 
             "Name": 'Mobile Development'
         },
         {
-            "id":3,
+            
 
             "Name": 'React'
         },
         {
-            "id":4,
+          
 
             "Name": 'Express'
         },
         {
-            "id":5,
+           
 
             "Name": 'Mango db'
         },
@@ -35,18 +35,27 @@ const lisOfService=[
 
 
 
-router.get('/:id',(request,response)=>{
-    const serviceId=Number(request.params.id);
-    const getService=lisOfService.find((service) => service.id===serviceId)
+// router.get('/:id',(request,response)=>{
+//     const serviceId=Number(request.params.id);
+//     const getService=lisOfService.find((service) => service.id===serviceId)
 
-    if(!getService){
-        response.status(500).send("Expected not found")
-        console.log(request.params.id)
-    }
-    else{
-        response.json(getService.Name)
-    }
+//     if(!getService){
+//         response.status(500).send("Expected not found")
+//         console.log(request.params.id)
+//     }
+//     else{
+//         response.json(getService.Name)
+//     }
+// })
+
+router.get('/:id([0-9]{1})',(request,response)=>{
+    response.send(request.user.Name)
 })
+router.param('id',(request,response,next,id)=>{
+    request.user=lisOfService[id-1]
+    next()
+})
+
 
 
 
