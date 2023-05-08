@@ -6,9 +6,17 @@ const branch = require('./branch.js')
 const home = require('./home.js')
 const contact = require('./contactus.js')
 const post = require('./post.js')
+
+
+app.use(express.urlencoded({extended : true}))
+
 app.get('/',(request,response)=>{
-    response.send("Welcome to Main Page")
+    response.render('index')
 })
+app.set('view engine', 'ejs')
+
+
+
 app.use('/about',about)
 app.use('/service',service)
 app.use('/branch',branch)
